@@ -1,0 +1,51 @@
+.custom-navbar-top {
+    background: linear-gradient(90deg, #000000 0%, #1e1b4b 50%, #4c1d95 100%);
+}
+.text-purple {
+    color: #7c3aed !important;
+}
+.text-purple:hover {
+    color: #a855f7 !important;
+}
+.bg-purple {
+    background-color: #7c3aed !important;
+}
+.navbar-nav .nav-link:hover {
+    color: #2563eb !important;
+}
+.dropdown-item:hover {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.custom-footer {
+    background: linear-gradient(180deg, #000000 0%, #1e1b4b 55%, #4c1d95 100%);
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.btn-purple {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+    color: #ffffff;
+}
+
+.btn-purple:hover {
+    background-color: #6d28d9;
+    border-color: #6d28d9;
+    color: #ffffff;
+}
+
+.custom-footer a.text-white:hover {
+    color: #a855f7 !important;
+}
