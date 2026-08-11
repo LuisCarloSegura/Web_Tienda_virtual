@@ -90,7 +90,7 @@
         </div>
 
         <div class="text-center pt-4 mt-4 border-top border-light border-opacity-10 small text-white-50">
-            &copy; {{ date('Y') }} {{ config('app.name', 'Nombre Empresa') }}. Todos los derechos reservados.
+            &copy; {{ date('Y') }} KonTech. Todos los derechos reservados.
         </div>
     </div>
 </footer>
