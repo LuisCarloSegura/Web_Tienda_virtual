@@ -67,12 +67,12 @@
                     <ul class="navbar-nav align-items-lg-center gap-lg-4 py-2 py-lg-0">
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle fw-bold text-dark d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-list fs-5"></i> VER CATEGORÍAS
-                            </a>
-                            <ul class="dropdown-menu shadow">
-                                <li><a class="dropdown-item" href="">Laptops</a></li>
-                                <li><a class="dropdown-item" href="">Celulares</a></li>
+                        <a class="nav-link dropdown-toggle fw-bold text-dark d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-list fs-5"></i> VER CATEGORÍAS
+                        </a>
+                        <ul class="dropdown-menu shadow">
+                            <li><a class="dropdown-item" href="{{ \Illuminate\Support\Facades\Route::has('categorias.show') ? route('categorias.show', 'laptops') : '#' }}">Laptops</a></li>
+                                <li><a class="dropdown-item" href="{{ \Illuminate\Support\Facades\Route::has('categorias.show') ? route('categorias.show', 'celulares') : '#' }}">Celulares</a></li>
                                 <li><a class="dropdown-item" href="">Audio</a></li>
                                 <li><a class="dropdown-item" href="">TV y proyección</a></li>
                             </ul>
