@@ -49,3 +49,53 @@
 .custom-footer a.text-white:hover {
     color: #a855f7 !important;
 }
+/*Producto Card*/
+.btn-outline-purple {
+    color: #7c3aed;
+    border-color: #7c3aed;
+}
+ 
+.btn-outline-purple:hover {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+    color: #ffffff;
+}
+ 
+.product-card img {
+    transition: transform 0.2s ease;
+}
+ 
+.product-card:hover img {
+    transform: scale(1.05);
+}
+ 
+.product-card-img-wrap {
+    position: relative;
+    overflow: hidden;
+}
+ 
+.add-to-cart-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.65rem 0.5rem;
+    text-align: center;
+}
+ 
+.product-card-img-wrap:hover .add-to-cart-overlay {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
