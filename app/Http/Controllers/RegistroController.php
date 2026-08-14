@@ -41,8 +41,11 @@ class RegistroController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $datosValidados['name'] = $datosValidados['nombre'];
         $datosValidados['password'] = Hash::make($datosValidados['password']);
+
+        // RESTRICCIÓN DE SEGURIDAD: El registro público asigna obligatoria y únicamente el rol de 'cliente'.
+        // Se prohíbe explícitamente el auto-registro de cuentas administradoras desde la web pública.
+        $datosValidados['rol'] = 'cliente';
 
         $usuario = User::create($datosValidados);
 
