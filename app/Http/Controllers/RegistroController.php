@@ -9,17 +9,11 @@ use Illuminate\Validation\Rule;
 
 class RegistroController extends Controller
 {
-    /**
-     * Muestra el formulario de registro de usuario.
-     */
     public function mostrarFormulario()
     {
-        return view('auth.registro');
+        return view('auth.register');
     }
 
-    /**
-     * Valida y almacena un nuevo usuario registrado.
-     */
     public function registrar(Request $solicitud)
     {
         $datosValidados = $solicitud->validate([
@@ -30,32 +24,33 @@ class RegistroController extends Controller
                 'required',
                 'string',
                 'email',
-                'regex:/@/',
                 Rule::unique('users', 'email'),
-                function ($atributo, $valor, $fallo) {
-                    if (!str_contains($valor, '@')) {
-                        $fallo('El correo electrónico debe contener el símbolo @.');
-                    }
-                },
             ],
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'primer_apellido.required' => 'El primer apellido es obligatorio.',
+            'segundo_apellido.required' => 'El segundo apellido es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'Ingrese un correo electrónico válido.',
+            'email.unique' => 'Este correo electrónico ya se encuentra registrado.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
 
         $datosValidados['password'] = Hash::make($datosValidados['password']);
-
-        // RESTRICCIÓN DE SEGURIDAD: El registro público asigna obligatoria y únicamente el rol de 'cliente'.
-        // Se prohíbe explícitamente el auto-registro de cuentas administradoras desde la web pública.
         $datosValidados['rol'] = 'cliente';
 
         $usuario = User::create($datosValidados);
 
         if ($solicitud->wantsJson()) {
             return response()->json([
-                'mensaje' => 'Usuario registrado correctamente.',
+                'mensaje' => 'Usuario registrado exitosamente.',
                 'usuario' => $usuario,
             ], 201);
         }
 
-        return redirect()->to('/login')->with('exito', 'Usuario registrado correctamente.');
+        return redirect()->route('login')->with('status', '¡Usuario registrado exitosamente! Ya puedes iniciar sesión.');
     }
 }
