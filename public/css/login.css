@@ -1,0 +1,67 @@
+/* ==========================================================================
+   ESTILOS DE LA VISTA DE INICIO DE SESIÓN (LOGIN) - KONTECH
+   ========================================================================== */
+
+/* Estilos generales del cuerpo de la página */
+body {
+    background: linear-gradient(135deg, #000000 0%, #1e1b4b 50%, #4c1d95 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 1.5rem;
+}
+
+/* Tarjeta principal del formulario de inicio de sesión */
+.login-card {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Encabezado superior de la tarjeta de inicio de sesión */
+.login-header {
+    background: linear-gradient(90deg, #000000 0%, #1e1b4b 50%, #4c1d95 100%);
+    padding: 2.5rem 2rem 2rem 2rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Cuerpo interno de la tarjeta que contiene los campos del formulario */
+.login-body { 
+    padding: 2.5rem 2.5rem; 
+}
+
+/* Botón principal de acción morado */
+.btn-purple {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+    color: #ffffff;
+}
+
+.btn-purple:hover {
+    background-color: #6d28d9;
+    border-color: #6d28d9;
+    color: #ffffff;
+}
+
+/* Clase utilitaria para texto en color morado */
+.text-purple { 
+    color: #7c3aed !important; 
+}
+
+/* Estado de enfoque para los campos del formulario */
+.form-control:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.25);
+}
+
+/* Ajuste específico para el campo de contraseña */
+#password { 
+    box-shadow: none; 
+}
