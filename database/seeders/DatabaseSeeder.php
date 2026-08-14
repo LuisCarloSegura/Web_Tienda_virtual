@@ -11,12 +11,30 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Sembrar la base de datos de la aplicación con usuarios iniciales de prueba.
-     */
     public function run(): void
     {
-        // Creación obligatoria del usuario Administrador de prueba
+        User::updateOrCreate(
+            ['email' => 'admin@technova.com'],
+            [
+                'nombre' => 'Administrador TechStore',
+                'primer_apellido' => 'TechStore',
+                'segundo_apellido' => 'CR',
+                'password' => Hash::make('12345678'),
+                'rol' => 'administrador',
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'cliente@technova.com'],
+            [
+                'nombre' => 'Cliente de Prueba',
+                'primer_apellido' => 'Prueba',
+                'segundo_apellido' => 'TecnoNova',
+                'password' => Hash::make('12345678'),
+                'rol' => 'cliente',
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'admin@tienda.com'],
             [
@@ -28,7 +46,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Creación / actualización del usuario Cliente de prueba
         User::updateOrCreate(
             ['email' => 'cliente@tienda.com'],
             [
