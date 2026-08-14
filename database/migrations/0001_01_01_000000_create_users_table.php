@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // Campo de rol para distinguir entre 'administrador' y 'cliente' (por defecto 'cliente')
+            $table->string('rol')->default('cliente');
             $table->rememberToken();
             $table->timestamps();
         });
