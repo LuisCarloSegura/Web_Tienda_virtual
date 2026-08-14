@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Kontech</title>
+    <title>Iniciar Sesión - TechStore CR / TecnoNova</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    {{-- Hoja de estilos externa para la vista de login --}}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
@@ -23,9 +22,9 @@
         </div>
 
         <div class="login-body">
-            @if (session('status'))
+            @if (session('status') || session('exito') || session('success'))
                 <div class="alert alert-success alert-dismissible fade show rounded-3 small mb-4" role="alert">
-                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('status') }}
+                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('status') ?? session('exito') ?? session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
             @endif
@@ -96,7 +95,7 @@
                 <div class="text-center pt-3 border-top">
                     <p class="small text-muted mb-2">
                         ¿Aún no tienes una cuenta?
-                        <a href="{{ Route::has('registro') ? route('registro') : url('/registro') }}" class="text-purple fw-bold text-decoration-none">
+                        <a href="{{ route('registro') }}" class="text-purple fw-bold text-decoration-none">
                             Regístrate aquí
                         </a>
                     </p>
