@@ -24,23 +24,94 @@
                 </form>
 
                 <div class="d-flex align-items-center gap-3 ms-auto">
-                    <a href="" class="text-white text-decoration-none small fw-semibold d-none d-sm-block">
-                        ACCESO / REGISTRO
-                    </a>
+                    @auth
+                        <div class="dropdown d-none d-sm-block">
+                            <a href="#" class="text-white text-decoration-none small fw-semibold dropdown-toggle d-flex align-items-center gap-2" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('Imágenes/Avatar/Avatar.png') }}" alt="Avatar {{ Auth::user()->nombre ?? Auth::user()->name }}" class="rounded-circle shadow-sm border border-2 border-white" style="width: 35px; height: 35px; object-fit: cover;">
+                                <div class="d-flex flex-column text-start">
+                                    <span class="fw-semibold lh-1">{{ Auth::user()->nombre ?? Auth::user()->name }}</span>
+                                    <span class="text-white-50 small lh-1 mt-1" style="font-size: 0.7rem;">{{ Auth::user()->email }}</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3 overflow-hidden" aria-labelledby="userDropdown" style="min-width: 220px;">
+                                <li>
+                                    <div class="px-3 py-2 border-bottom bg-light">
+                                        <div class="fw-bold small text-dark text-truncate">{{ Auth::user()->nombre ?? Auth::user()->name }}</div>
+                                        <div class="small text-muted text-truncate" style="font-size: 0.75rem;">{{ Auth::user()->email }}</div>
+                                        {{-- Indicador dinámico del rol del usuario autenticado --}}
+                                        <span class="badge {{ Auth::user()->esAdministrador() ? 'bg-danger' : 'bg-primary' }} text-white mt-1" style="font-size: 0.65rem;">
+                                            {{ ucfirst(Auth::user()->rol ?? 'cliente') }}
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="#">
+                                        <i class="bi bi-pencil-square text-purple fs-6"></i>Cambiar
+                                    </a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout.switch') }}" class="m-0">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2 w-100 border-0 bg-transparent text-start">
+                                            <i class="bi bi-arrow-repeat text-purple fs-6"></i>Cambiar de cuenta
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item py-2 text-danger small fw-semibold d-flex align-items-center gap-2 w-100 border-0 bg-transparent text-start">
+                                            <i class="bi bi-box-arrow-right fs-6"></i>Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                                
+                                {{-- ============ OPCIONES DINÁMICAS SEGÚN EL ROL ============ --}}
+                                <li><hr class="dropdown-divider my-1"></li>
+                                @if(Auth::user()->esAdministrador())
+                                    {{-- Opciones exclusivas para Administradores (Gestión y modificación de productos) --}}
+                                    <li>
+                                        <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="#">
+                                            <i class="bi bi-box-seam text-purple fs-6"></i>Gestión de productos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="#">
+                                            <i class="bi bi-pencil-square text-purple fs-6"></i>Modificación de productos
+                                        </a>
+                                    </li>
+                                @else
+                                    {{-- Opciones exclusivas para Clientes (Historial de compras) --}}
+                                    <li>
+                                        <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="#">
+                                            <i class="bi bi-bag-check text-purple fs-6"></i>Historial de compras
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="text-white text-decoration-none small fw-semibold d-none d-sm-block">
+                            ACCESO / REGISTRO
+                        </a>
+                    @endauth
 
-                    <a href="" class="text-white fs-5">
-                        <i class="bi bi-heart"></i>
-                    </a>
+                    {{-- ============ VISTA DE COMPRAS (Deseos y Carrito solo para Clientes o Invitados) ============ --}}
+                    @if(!Auth::check() || !Auth::user()->esAdministrador())
+                        <a href="" class="text-white fs-5">
+                            <i class="bi bi-heart"></i>
+                        </a>
 
-                    <a href="" class="text-white text-decoration-none d-flex align-items-center gap-2 position-relative">
-                        <span class="position-relative fs-5">
-                            <i class="bi bi-cart3"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-purple" style="font-size: .6rem;">
-                                {{ $cartCount ?? 0 }}
+                        <a href="" class="text-white text-decoration-none d-flex align-items-center gap-2 position-relative">
+                            <span class="position-relative fs-5">
+                                <i class="bi bi-cart3"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-purple" style="font-size: .6rem;">
+                                    {{ $cartCount ?? 0 }}
+                                </span>
                             </span>
-                        </span>
-                        <span class="d-none d-md-inline fw-semibold small">₡{{ $cartTotal ?? 0 }}</span>
-                    </a>
+                            <span class="d-none d-md-inline fw-semibold small">₡{{ $cartTotal ?? 0 }}</span>
+                        </a>
+                    @endif
 
                     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                         <span class="navbar-toggler-icon"></span>
