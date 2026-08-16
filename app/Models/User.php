@@ -14,18 +14,28 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * La clave primaria asociada a la tabla.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_usuario';
+
+    /**
+     * Los atributos que son asignables en masa.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nombre',
+        'primer_apellido',
+        'segundo_apellido',
         'email',
         'password',
+        'rol',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben ocultarse para la serialización.
      *
      * @var list<string>
      */
@@ -35,7 +45,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Obtiene los atributos que deben ser convertidos.
      *
      * @return array<string, string>
      */
@@ -45,5 +55,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Comprueba si el usuario tiene el rol de administrador.
+     *
+     * @return bool Devuelve verdadero si el rol del usuario es 'administrador'.
+     */
+    public function esAdministrador(): bool
+    {
+        return $this->rol === 'administrador';
+    }
+
+    /**
+     * Comprueba si el usuario tiene el rol de cliente.
+     *
+     * @return bool Devuelve verdadero si el rol del usuario es 'cliente'.
+     */
+    public function esCliente(): bool
+    {
+        return $this->rol === 'cliente';
+    }
+
+    /**
+     * Accesorio para obtener el nombre del usuario mediante la propiedad 'name'.
+     *
+     * @return string|null
+     */
+    public function getNameAttribute(): ?string
+    {
+        return $this->attributes['nombre'] ?? null;
     }
 }
