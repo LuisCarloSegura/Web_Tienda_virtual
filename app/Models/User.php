@@ -21,8 +21,8 @@ class User extends Authenticatable
     protected $primaryKey = 'id_usuario';
 
     /**
-     * Los atributos que son asignables en masa.
-     *
+     * 
+     
      * @var list<string>
      */
     protected $fillable = [
@@ -35,7 +35,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Los atributos que deben ocultarse para la serialización.
+     * 
      *
      * @var list<string>
      */
