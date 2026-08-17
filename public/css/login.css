@@ -1,7 +1,3 @@
-/* ==========================================================================
-   ESTILOS DE LA VISTA DE INICIO DE SESIÓN (LOGIN) - KONTECH
-   ========================================================================== */
-
 /* Estilos generales del cuerpo de la página */
 body {
     background: linear-gradient(135deg, #000000 0%, #1e1b4b 50%, #4c1d95 100%);
@@ -33,8 +29,8 @@ body {
 }
 
 /* Cuerpo interno de la tarjeta que contiene los campos del formulario */
-.login-body { 
-    padding: 2.5rem 2.5rem; 
+.login-body {
+    padding: 2.5rem 2.5rem;
 }
 
 /* Botón principal de acción morado */
@@ -51,8 +47,8 @@ body {
 }
 
 /* Clase utilitaria para texto en color morado */
-.text-purple { 
-    color: #7c3aed !important; 
+.text-purple {
+    color: #7c3aed !important;
 }
 
 /* Estado de enfoque para los campos del formulario */
@@ -62,6 +58,6 @@ body {
 }
 
 /* Ajuste específico para el campo de contraseña */
-#password { 
-    box-shadow: none; 
+#password {
+    box-shadow: none;
 }
