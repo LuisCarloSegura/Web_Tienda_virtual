@@ -5,6 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProductoAdminController;
+use App\Http\Controllers\PaginaController;
+use App\Http\Controllers\ProductoController;
 
 use App\Http\Controllers\PerfilController;
 
@@ -28,3 +32,18 @@ Route::post('/register', [RegistroController::class, 'registrar'])->name('regist
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::post('/logout/cambiar-cuenta', [AuthenticatedSessionController::class, 'switchAccount'])->name('logout.switch');
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin']) // 'admin' = el middleware EsAdministrador
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('productos', ProductoAdminController::class)->except(['show']);
+    });
+
+Route::get('/sobre-nosotros', [PaginaController::class, 'nosotros'])->name('nosotros');
+Route::get('/metodos-de-pago', [PaginaController::class, 'pagos'])->name('pagos');
+Route::get('/contactanos', [PaginaController::class, 'contacto'])->name('contacto');
+
+Route::get('/producto/{producto}', [ProductoController::class, 'show'])
+    ->name('productos.show');
