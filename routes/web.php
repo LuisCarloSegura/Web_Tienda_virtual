@@ -10,12 +10,19 @@ use App\Http\Controllers\Admin\ProductoAdminController;
 use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\ProductoController;
 
+use App\Http\Controllers\PerfilController;
+
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/categoria/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/mi-cuenta', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::put('/mi-cuenta', [PerfilController::class, 'update'])->name('perfil.update');
 });
 
 Route::get('/registro', [RegistroController::class, 'mostrarFormulario'])->name('registro');

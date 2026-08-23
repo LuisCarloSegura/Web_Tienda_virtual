@@ -70,8 +70,8 @@
                                 </li>
                             @else
                                 <li>
-                                    <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="#">
-                                        <i class="bi bi-bag-check text-purple fs-6"></i>Historial de compras
+                                    <a class="dropdown-item py-2 text-dark small fw-semibold d-flex align-items-center gap-2" href="{{ route('perfil.index') }}">
+                                        <i class="bi bi-pencil-square text-purple fs-6"></i>Editar perfil
                                     </a>
                                 </li>
                             @endif
