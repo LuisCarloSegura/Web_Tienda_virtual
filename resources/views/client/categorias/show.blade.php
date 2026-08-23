@@ -1,3 +1,4 @@
+@include('partials.head')
 @include('partials.header')
 
 <div class="container py-4">
@@ -42,3 +43,4 @@
 </div>
 
 @include('partials.footer')
+@include('partials.scripts')

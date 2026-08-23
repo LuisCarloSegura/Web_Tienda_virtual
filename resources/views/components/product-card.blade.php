@@ -31,7 +31,7 @@
         <div class="card-body d-flex flex-column">
             <h6 class="card-title mb-1">{{ $producto->nombre }}</h6>
             <div class="fw-bold text-purple mb-2">₡{{ number_format($producto->precio, 0, ',', '.') }}</div>
-            <a href="{{ \Illuminate\Support\Facades\Route::has('productos.show') ? route('productos.show', $producto) : '#' }}"
+            <a href="{{ route('productos.show', $producto) }}"
                class="btn btn-outline-purple btn-sm mt-auto">
                 Ver producto
             </a>

@@ -1,3 +1,4 @@
+@include('partials.head')
 @include('partials.header')
 
 <main>
@@ -5,3 +6,4 @@
 </main>
 
 @include('partials.footer')
+@include('partials.scripts')
